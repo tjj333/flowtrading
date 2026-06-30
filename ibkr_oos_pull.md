@@ -133,6 +133,13 @@ Confirm benchmarks (US RTH, adjusted): SMH, ARM
   4684.T   (OBICY)
   6645.T   (OMRNY)
 
-## Validation - report a notes line before sending
+## Validation - run before delivering
 For each ord file: % of trading days with >=1 bar in 00:00-00:30 UTC (Tokyo open) AND >=1 bar in
-05:30-06:00 UTC (Tokyo close). Both should be ~100%. If either is low the windowing is still wrong - do not ship it.
+05:30-06:00 UTC (Tokyo close). Both should be ~100%. If either is low the windowing is still wrong - fix it, do not deliver.
+
+## Delivery (READ-ONLY repo - do NOT push)
+This repo is instructions only. Do NOT commit or push the data or anything else back here.
+- Save the output CSVs locally (e.g. an `out/` folder) using the filenames in the Shared spec.
+- Write a local `pull_status.md` summarising: which instruments you pulled, the open/close coverage %
+  per ord (from Validation), date range per file, and any issues (e.g. 5803.T limit-up / sparse).
+- The data + pull_status will be collected from this machine separately - you do not need to transfer them.

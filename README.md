@@ -10,9 +10,11 @@ machine**. Coordination artifacts only — no model code, positions, or P&L live
 - **`bloomberg_fields.md`** — validated Bloomberg reference-data field mnemonics for the static
   event/corp-action pull (earnings, sales, AGM/meetings, dividends, splits, stock dividends).
 
-## Workflow
-1. IBKR PC: `git pull`, read `ibkr_oos_pull.md`, run the pull, write a short `pull_status.md` here, `git push`.
-2. Japan Directional PC: `git pull` to pick up status / delivered-file manifests.
+## Workflow (this repo is READ-ONLY for the worker machines)
+The coordinating session publishes instruction `.md` files here. Worker machines (IBKR / Bloomberg)
+**only read** them — they do NOT push anything back.
+1. Worker PC: `git pull`, read the relevant instruction file (e.g. `ibkr_oos_pull.md`), execute it,
+   save outputs **locally**, write a local `pull_status.md`.
+2. The owner collects the data + status from the worker machine **out-of-band** (not via git).
 
-(Bulk price CSVs are NOT committed here — too large for git. They move via the IBKR data tree;
-this repo carries the specs, field lists, and status notes that keep the two machines in sync.)
+(No data is committed here — instructions, field lists, and specs only.)
